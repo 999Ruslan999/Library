@@ -1,11 +1,11 @@
-package person.people.spring.util;
+package person.book.spring.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import person.people.spring.dao.PersonDAO;
-import person.people.spring.models.Person;
+import person.book.spring.dao.PersonDAO;
+import person.book.spring.models.Person;
 
 @Component
 public class PersonValidator implements Validator {
@@ -25,13 +25,12 @@ public class PersonValidator implements Validator {
 
         Person person = (Person) o;
 
-        if(personDAO.show(person.getEmail()).isPresent()) {
-            errors.rejectValue("email", "", "This email is already taken");
-
-        }
-
-
+        if(personDAO.getPersonByFullName(person.getFullName()).isPresent())
+            errors.rejectValue("fullName", " ", "Человек с таким именем уже существует");
+        
     }
+
+
 }
 
 

@@ -1,13 +1,11 @@
-package person.people.spring.controllers;
+package person.book.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import person.people.spring.dao.PersonDAO;
-import person.people.spring.models.Person;
-
-import javax.validation.constraints.Min;
+import person.book.spring.dao.PersonDAO;
+import person.book.spring.models.Person;
 
 @Controller
 @RequestMapping("/admin")
