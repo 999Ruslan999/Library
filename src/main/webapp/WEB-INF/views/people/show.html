@@ -2,20 +2,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Просмотр клиента</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Клиент</title>
 </head>
 <body>
-<a th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">user</a>
+<p th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">VALUE</p>
 
-<br>
+<div th:if="${books.isEmpty()}">
+    <p>Человек пока не взял ни одной книги</p>
+    <hr/>
+</div>
 
-<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать</a>
+<div th:if="${!books.isEmpty()}">
+    <hr/>
+    <b>Книги:</b>
+    <br/>
+    <table th:each="book : ${books}">
+        <tr th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</tr>
+    </table>
+    <hr/>
+</div>
 
-<br>
-<br>
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
     <input type="submit" value="Удалить"/>
 </form>
+
+<br>
+<br>
+<a href="/books">Книги</a>
+
 </body>
 </html>
